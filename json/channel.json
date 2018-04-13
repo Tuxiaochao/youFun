@@ -1,0 +1,22 @@
+{
+    "msg": "ok",
+    "status": "0",
+    "result": [
+        { "channelid": "1", "channel": "热门" },
+        { "channelid": "2", "channel": "段子" },
+        { "channelid": "3", "channel": "养生堂" },
+        { "channelid": "4", "channel": "私房话" },
+        { "channelid": "5", "channel": "八卦精" },
+        { "channelid": "6", "channel": "科技咖" },
+        { "channelid": "7", "channel": "财经迷" },
+        { "channelid": "8", "channel": "汽车控" },
+        { "channelid": "9", "channel": "生活家" },
+        { "channelid": "10", "channel": "时尚圈" },
+        { "channelid": "11", "channel": "育儿" },
+        { "channelid": "12", "channel": "旅游" },
+        { "channelid": "13", "channel": "职场" },
+        { "channelid": "14", "channel": "美食" },
+        { "channelid": "15", "channel": "历史" },
+        { "channelid": "16", "channel": "时尚圈" }
+    ]
+}
