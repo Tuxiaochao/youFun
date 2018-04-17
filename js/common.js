@@ -23,7 +23,7 @@ $(document).ready(function() {
         var title = $(".head p");
         switch(page) {
             case 0: 
-                getArticle();
+                getChannels();
                 title.html("精选文章");
                 break;
             case 1:
@@ -41,7 +41,7 @@ $(document).ready(function() {
         }
     }
 
-    function getArticle() {
+    function getChannels() {
         var content = $(".content");
         $.ajax({
             // url: "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/channel",

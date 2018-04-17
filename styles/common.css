@@ -13,7 +13,7 @@ body {
     width: 100%;
     height: 100%;
 }
-ul {
+.main>ul {
     position: fixed;
     bottom: 0;
     margin: 0;
@@ -24,7 +24,7 @@ ul {
     border-top: 1px solid#dee2e6;
 }
 
-ul>li {
+.main>ul>li {
     width: 25%;
     height: 100%;
     float: left;
@@ -34,12 +34,12 @@ ul>li {
     line-height: 100%;
 }
 
-ul>li>img {
+.main>ul>li>img {
     margin-top: 5px;
     width: 32px;
 }
 
-ul>li>p {
+.main>ul>li>p {
     margin: 0;
     margin-top: 5px;
     padding: 0;
@@ -48,7 +48,7 @@ ul>li>p {
     color: #515151;
 }
 
-ul>li.active>p {
+.main>ul>li.active>p {
     color: #44abe1;
 }
 
@@ -61,7 +61,7 @@ ul>li.active>p {
     height: 50px;
     line-height: 50px;
     background-color: #4371ff;
-    border-bottom: 1px solid#dee2e6;
+    z-index: 99999999999;
 }
 
 .head p {
@@ -87,14 +87,76 @@ ul>li.active>p {
     width: 100%;
     height: 30px;
     border-bottom: 1px solid #dee2e6;
+    position: fixed;
+    top: 50px;
+    z-index: 999;
+    background-color: #fff;
 }
 
 .nav span {
     float: left;
     padding: 5px;
     margin: auto;
+    cursor: pointer;
 }
 
+.currentChannel {
+    color: red;
+    font-weight: bolder;
+}
+
+.articleList {
+    width: 100%;
+    height: 100%;
+    padding: 25px 20px;
+    z-index: 0;
+    background-color: rgb(240,240,240);
+}
+
+.articleList ul {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    overflow-y: scroll;
+}
+
+.articleList ul li {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 20px 0;
+    list-style: none;
+}
+
+.articleList ul li a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.articleList ul li img {
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.articleList ul li .summary {
+    padding: 0.5rem;
+    background-color: #fff;
+    color: #000;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.articleList ul li .imgBox {
+    position: relative;
+}
+
+.imgBox .title {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    color: #fff;
+}
 
 
 
