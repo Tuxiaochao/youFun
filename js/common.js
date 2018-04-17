@@ -44,8 +44,8 @@ $(document).ready(function() {
     function getChannels() {
         var content = $(".content");
         $.ajax({
-            // url: "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/channel",
-            url: "json/channel.json",
+            url: "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/channel",
+            // url: "json/channel.json",
             type: "GET",
             data: {},
             dataType: "json",
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
             },
             beforeSend: function(xhr) {
-                // xhr.setRequestHeader("Authorization", "APPCODE f02fb33b2e774207ae69298c1acb1045");
+                xhr.setRequestHeader("Authorization", "APPCODE f02fb33b2e774207ae69298c1acb1045");
                 content.load("pages/articles/articles.html");
             }  
         });
