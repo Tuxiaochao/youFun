@@ -175,7 +175,19 @@ body {
 
 
 /****************** pictures *****************/
+.pictures {
+    width: 100%;
+    height: 100%;
+    padding: 5px 20px;
+    margin-top: 50px;
+    z-index: 0;
+    background-color: rgb(240,240,240);
+}
 
+.pictures .swiper-container {
+    width: 100%;
+    height: 80px;
+}  
 
 
 

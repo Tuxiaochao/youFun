@@ -66,7 +66,28 @@ $(document).ready(function() {
     }
 
     function getNews() {}
-    function getPicture() {}
+    function getPicture() {
+        var content = $(".content");
+        var url = useLocalData ? "json/pictureType.json" : "http://ali-pic.showapi.com/852-1";
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {},
+            dataType: "json",
+            cache: true,
+            success: function(result,status,xhr) {
+                renderPictures(result.showapi_res_body.list);
+            },
+            error: function(xhr,status,error) {
+
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "APPCODE f02fb33b2e774207ae69298c1acb1045");
+                content.load("pages/pictures/pictures.html");
+            }  
+        });
+    }
+
     function getHistory() {
         var content = $(".content");
         var url = useLocalData ? "json/history.json" : "http://ali-todayhistory.showapi.com/today-of-history";
