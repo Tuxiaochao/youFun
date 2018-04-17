@@ -22,8 +22,9 @@ function getArticle(channelid) {
     $(".articles .nav").find('span[id="channel_'+ channelid +'"]').addClass("currentChannel");
 
     //get articleList
+    var url = useLocalData ? "json/articlelist.json" : "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/get";
     $.ajax({
-        url: "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/get",
+        url: url,
         // url: "json/articlelist.json",
         type: "GET",
         data: {

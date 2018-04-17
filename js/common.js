@@ -1,4 +1,6 @@
+var useLocalData = false;
 $(document).ready(function() {
+    
     var page = 0;
     directPage(page);
     $(".tab").find("li").click(function() {
@@ -43,9 +45,9 @@ $(document).ready(function() {
 
     function getChannels() {
         var content = $(".content");
+        var url = useLocalData ? "json/channel.json" : "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/channel";
         $.ajax({
-            url: "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/channel",
-            // url: "json/channel.json",
+            url: url,
             type: "GET",
             data: {},
             dataType: "json",
@@ -65,5 +67,25 @@ $(document).ready(function() {
 
     function getNews() {}
     function getPicture() {}
-    function getHistory() {}
+    function getHistory() {
+        var content = $(".content");
+        var url = useLocalData ? "json/history.json" : "http://ali-todayhistory.showapi.com/today-of-history";
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {},
+            dataType: "json",
+            cache: true,
+            success: function(result,status,xhr) {
+                renderHistory(result.showapi_res_body.list);
+            },
+            error: function(xhr,status,error) {
+
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "APPCODE f02fb33b2e774207ae69298c1acb1045");
+                content.load("pages/history/history.html");
+            }  
+        });
+    }
 });
