@@ -36,7 +36,7 @@ $(document).ready(function() {
                 getPicture();
                 title.html("精选美图");
                 break;
-            case 3:
+            case 3:;
                 getHistory();
                 title.html("往日今期");
                 break;

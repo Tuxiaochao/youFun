@@ -1,15 +1,15 @@
 function renderNav(channelArr) {
-    var nav = $(".articles .nav");
+    var navs = $(".articles .navs");
     var channels = '';
     channelArr.forEach((item, index) => {
         console.log("articles", item);
         channels += '<span id="channel_' + item.channelid + '">' + item.channel + '</span>';
     });
     setTimeout(function() {
-        nav.html(channels);
+        navs.html(channels);
 
         // 点击频道请求该频道的文章
-        $(".articles .nav").find('span').click(function() {
+        $(".articles .navs").find('span').click(function() {
             getArticle($(this).attr("id").split("_")[1]);
         });
         
@@ -18,8 +18,8 @@ function renderNav(channelArr) {
 }
 
 function getArticle(channelid) {
-    $(".articles .nav").find('span').removeClass("currentChannel");
-    $(".articles .nav").find('span[id="channel_'+ channelid +'"]').addClass("currentChannel");
+    $(".articles .navs").find('span').removeClass("currentChannel");
+    $(".articles .navs").find('span[id="channel_'+ channelid +'"]').addClass("currentChannel");
 
     //get articleList
     var url = useLocalData ? "json/articlelist.json" : "http://jisuwxwzjx.market.alicloudapi.com/weixinarticle/get";
