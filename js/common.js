@@ -1,4 +1,4 @@
-var useLocalData = false;
+var useLocalData = true;
 $(document).ready(function() {
     
     var page = 0;
