@@ -80,6 +80,13 @@ body {
     overflow: auto;
 }
 
+.tab .show {
+    display: block;
+}
+
+.tab .hide {
+    display: none;
+}
 
 /****************** articles *****************/
 
@@ -107,7 +114,7 @@ body {
     overflow-x: auto;
     margin: 0;
     padding: 0;
-    width: 200%;
+    width: 220%;
     height: 30px;
     border-bottom: 1px solid #dee2e6;
     
@@ -198,7 +205,6 @@ body {
 /****************** pictures *****************/
 .pictures {
     width: 100%;
-    height: 100%;
     padding: 5px 20px;
     z-index: 0;
     background-color: rgb(240,240,240);

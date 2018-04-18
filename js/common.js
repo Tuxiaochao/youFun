@@ -4,21 +4,17 @@ $(document).ready(function() {
     var page = 0;
     directPage(page);
     $(".tab").find("li").click(function() {
+        // 清除老的active li的样式
+        var oldLi = $(".tab li").eq(page);
+        oldLi.find("img").attr("src", oldLi.find("img").attr("src").replace(/_active.png/g, ".png"));
+        oldLi.removeClass("active")
+
         page = $(this).index();
         directPage(page);
-        var lis = $(this).parent().find("li");
-        lis.each((index, element) => {
-            var img = $(element).find("img");
-            if (index == page) {
-                if (!$(element).attr("class") || $(element).attr("class").indexOf("active") <= -1) {
-                    $(element).addClass("active");
-                    img.attr("src", img.attr("src").replace(/.png/g, "_active.png"));
-                }
-            } else {
-                $(element).removeClass("active");
-                img.attr("src", img.attr("src").replace(/_active.png/g, ".png"))
-            }
-        });
+        // 添加新的active li的样式
+        $(this).addClass("active");
+        var activeImg = $(this).find("img");
+        activeImg.attr("src", activeImg.attr("src").replace(/.png/g, "_active.png"));
     });
 
     function directPage(page) {
