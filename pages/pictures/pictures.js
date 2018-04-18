@@ -45,7 +45,7 @@ function getPictures(id) {
             url: url,
             type: "GET",
             data: {
-                "page": 2,
+                "page": 10,
                 "type": id
             },
             dataType: "json",
