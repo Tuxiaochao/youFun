@@ -2,7 +2,6 @@ function renderNav(channelArr) {
     var navs = $(".articles .navs");
     var channels = '';
     channelArr.forEach((item, index) => {
-        console.log("articles", item);
         channels += '<span id="channel_' + item.channelid + '">' + item.channel + '</span>';
     });
     setTimeout(function() {

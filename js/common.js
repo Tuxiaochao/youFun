@@ -61,7 +61,44 @@ $(document).ready(function() {
         });
     }
 
-    function getNews() {}
+    function getNews(type) {
+        var content = $(".content");
+        var realUrl = useLocalData ? "json/news.json" :"http://toutiao-ali.juheapi.com/toutiao/index";
+        var data = {};
+        if (type) {
+            data.type = type;
+        }
+        var request = function(url) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: data,
+                dataType: "json",
+                cache: true,
+                success: function(result,status,xhr) {
+                    renderNews(result.result.data);
+                    setTimeout(function() {
+                        $(".news .menu span").click(function() {
+                            $(".news .menu span").removeClass("currentType");
+                            $(this).addClass("currentType");
+                            getNews($(this).attr("type"));
+                        });
+                    }, 0);
+                },
+                error: function(xhr,status,error) {
+                    request("json/news.json");
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Authorization", "APPCODE f02fb33b2e774207ae69298c1acb1045");
+                    if ($(".news .menu span").length <= 0) {
+                        content.load("pages/news/news.html");
+                    }
+                }  
+            });
+        }
+        request(realUrl);
+    }
+
     function getPicture() {
         var content = $(".content");
         var url = useLocalData ? "json/pictureType.json" : "http://ali-pic.showapi.com/852-1";
