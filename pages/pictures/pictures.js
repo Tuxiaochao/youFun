@@ -40,7 +40,8 @@ function renderPictures(list) {
 }
 
 function getPictures(id) {
-        var url = useLocalData ? "json/pictures.json" : "http://ali-pic.showapi.com/852-2";
+        var url = !useLocalData ? "json/pictures.json" : "http://ali-pic.showapi.com/852-2";
+        url = "json/pictures.json";
         $.ajax({
             url: url,
             type: "GET",

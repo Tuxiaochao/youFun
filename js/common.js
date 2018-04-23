@@ -1,4 +1,4 @@
-var useLocalData = false;
+var useLocalData = true;
 $(document).ready(function() {
     
     var page = 0;
@@ -101,7 +101,8 @@ $(document).ready(function() {
 
     function getPicture() {
         var content = $(".content");
-        var url = useLocalData ? "json/pictureType.json" : "http://ali-pic.showapi.com/852-1";
+        var url = !useLocalData ? "json/pictureType.json" : "http://ali-pic.showapi.com/852-1";
+        url = "json/pictureType.json";
         $.ajax({
             url: url,
             type: "GET",
