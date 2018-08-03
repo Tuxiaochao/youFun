@@ -51,8 +51,16 @@
 
     const canvas = document.createElement('canvas');
 
+    const constraints = {
+      audio: {
+        deviceId: { exact: audioSelect.value }
+      },
+      video: {
+        deviceId: { exact: videoSelect.value }
+      }
+    };
+
     captureVideoButton.onclick = function () {
-      alert(213);
       navigator.mediaDevices.getUserMedia(constraints).
         then(handleSuccess).catch(handleError);
     };
@@ -66,7 +74,7 @@
     };
 
     function handleSuccess(stream) {
-
+      alert(213);
       screenshotButton.disabled = false;
       video.srcObject = stream;
     }
