@@ -61,6 +61,7 @@
     };
 
     captureVideoButton.onclick = function () {
+      alert("aaa");
       navigator.mediaDevices.getUserMedia(constraints).
         then(handleSuccess).catch(handleError);
     };
