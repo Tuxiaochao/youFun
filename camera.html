@@ -52,12 +52,8 @@
     const canvas = document.createElement('canvas');
 
     const constraints = {
-      audio: {
-        deviceId: { exact: audioSelect.value }
-      },
-      video: {
-        deviceId: { exact: videoSelect.value }
-      }
+      audio: true,
+      video: true
     };
 
     captureVideoButton.onclick = function () {
@@ -66,13 +62,13 @@
         then(handleSuccess).catch(handleError);
     };
 
-    screenshotButton.onclick = video.onclick = function () {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0);
-      // Other browsers will fall back to image/png
-      img.src = canvas.toDataURL('image/webp');
-    };
+    // screenshotButton.onclick = video.onclick = function () {
+    //   canvas.width = video.videoWidth;
+    //   canvas.height = video.videoHeight;
+    //   canvas.getContext('2d').drawImage(video, 0, 0);
+    //   // Other browsers will fall back to image/png
+    //   img.src = canvas.toDataURL('image/webp');
+    // };
 
     function handleSuccess(stream) {
       alert(213);
