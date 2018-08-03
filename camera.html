@@ -37,7 +37,7 @@
 <body>
   <div id="screenshot">
     <video autoplay></video>
-    <img src="">
+    <img src="" style="display:none;">
     <canvas style="display:none;"></canvas>
     <button id="capture-button">Capture Video</button>
     <button id="screenshot-button">ScreenShot</button>
@@ -52,7 +52,6 @@
     const canvas = document.createElement('canvas');
 
     const constraints = {
-      audio: true,
       video: true
     };
 
@@ -67,6 +66,7 @@
       canvas.getContext('2d').drawImage(video, 0, 0);
       // Other browsers will fall back to image/png
       img.src = canvas.toDataURL('image/webp');
+      img.style.display = "block";
     };
 
     function handleSuccess(stream) {
