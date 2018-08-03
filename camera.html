@@ -52,7 +52,10 @@
     const canvas = document.createElement('canvas');
 
     const constraints = {
-      video: true
+      video: {
+        width: { ideal: 2000 },
+        height: { ideal: 1000 }
+      }
     };
 
     captureVideoButton.onclick = function () {
