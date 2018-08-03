@@ -39,13 +39,13 @@
     <video autoplay></video>
     <img src="">
     <canvas style="display:none;"></canvas>
-    <button class="capture-button">Capture Video</button>
+    <button id="capture-button">Capture Video</button>
     <button id="screenshot-button">ScreenShot</button>
   </div>
 
   <script>
-    const captureVideoButton = document.getElementsByClassName('capture-button')[0];
-    const screenshotButton = document.querySelector('#screenshot-button');
+    const captureVideoButton = document.getElementById('capture-button');
+    const screenshotButton = document.getElementById('screenshot-button');
     const img = document.querySelector('#screenshot img');
     const video = document.querySelector('#screenshot video');
 
