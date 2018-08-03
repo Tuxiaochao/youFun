@@ -25,13 +25,10 @@
     }
 
     function fileUpload(e) {
-      getUserMedia().then(stream => {
         alert(123);
-        text.innerText = mediaStream;
-        var pic = document.querySelector('pic');
-        pic.srcObject = mediaStream;
-      }).catch(err => {
-        alert(3);
+      getUserMedia().then(function(stream){
+        text.innerText = stream;
+        pic.srcObject = stream;
       })
     }
 
