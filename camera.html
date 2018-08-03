@@ -35,11 +35,14 @@
 </head>
 
 <body>
-  <video autoplay></video>
-  <img src="">
-  <canvas style="display:none;"></canvas>
-  <button id="screenshot" class="capture-button">Capture Video</button>
-  <button id="screenshot-button">ScreenShot</button>
+  <div id="screenshot">
+    <video autoplay></video>
+    <img src="">
+    <canvas style="display:none;"></canvas>
+    <button class="capture-button">Capture Video</button>
+    <button id="screenshot-button">ScreenShot</button>
+  </div>
+
   <script>
     const captureVideoButton = document.querySelector('#screenshot .capture-button');
     const screenshotButton = document.querySelector('#screenshot-button');
@@ -49,6 +52,7 @@
     const canvas = document.createElement('canvas');
 
     captureVideoButton.onclick = function () {
+      alert(213);
       navigator.mediaDevices.getUserMedia(constraints).
         then(handleSuccess).catch(handleError);
     };
@@ -62,7 +66,7 @@
     };
 
     function handleSuccess(stream) {
-      alert(213);
+
       screenshotButton.disabled = false;
       video.srcObject = stream;
     }
