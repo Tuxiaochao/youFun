@@ -21,8 +21,8 @@
     var constraints = { camera: true };
     navigator.mediaDevices.getUserMedia(constraints)
       .then(function (mediaStream) {
-        var pic = document.getElementById('pic');
-        pic.src = mediaStream;
+        var pic = document.querySelector('pic');
+        pic.srcObject = mediaStream;
         alert(123);
         var pic = document.getElementById('text');
         text.innerText = mediaStream;
