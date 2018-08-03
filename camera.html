@@ -11,27 +11,33 @@
 </head>
 
 <body>
-  <span id="text"></span>
-  <img id="pic" src="" alt="自拍" />
-  <input type="file" accept="image/*;capture=camera" (change)="fileUpload($event)"/>
+  <device type="media" onchange="update(this.data)"></device>
+  <video autoplay></video>
 </body>
 <script>
   window.onload = function () {
-    var pic = document.querySelector('pic');
-    var text = document.getElementById('text');
-    function getUserMedia() {
-      var constraints = { camera: true };
-      return navigator.mediaDevices.getUserMedia(constraints);
-    }
+    if (hasGetUserMedia()) {
+      // Good to go!
+      alert('getUserMedia() is supported in your browser');
 
-    function fileUpload(e) {
-        alert(123);
-      getUserMedia().then(function(stream){
-        text.innerText = stream;
-        pic.srcObject = stream;
-      })
-    }
 
+
+
+
+
+    } else {
+      alert('getUserMedia() is not supported in your browser');
+    }
+  }
+
+  function update(stream) {
+    document.querySelector('video').src = stream.url;
+  }
+
+  function hasGetUserMedia() {
+    // Note: Opera builds are unprefixed.
+    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia || navigator.msGetUserMedia);
   }
 </script>
 
