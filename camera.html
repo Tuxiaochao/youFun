@@ -13,21 +13,28 @@
 <body>
   <span id="text"></span>
   <img id="pic" src="" alt="自拍" />
-  <input type="file" accept="image/*;capture=camera" />
+  <input type="file" accept="image/*;capture=camera" (change)="fileUpload($event)"/>
 </body>
 <script>
   window.onload = function () {
-    alert(123);
-    var constraints = { camera: true };
-    navigator.mediaDevices.getUserMedia(constraints)
-      .then(function (mediaStream) {
+    var pic = document.querySelector('pic');
+    var text = document.getElementById('text');
+    function getUserMedia() {
+      var constraints = { camera: true };
+      return navigator.mediaDevices.getUserMedia(constraints);
+    }
+
+    function fileUpload(e) {
+      getUserMedia().then(stream => {
+        alert(123);
+        text.innerText = mediaStream;
         var pic = document.querySelector('pic');
         pic.srcObject = mediaStream;
-        alert(123);
-        var pic = document.getElementById('text');
-        text.innerText = mediaStream;
+      }).catch(err => {
+        alert(3);
       })
-      .catch(function (err) { console.log(err.name + ": " + err.message); });
+    }
+
   }
 </script>
 
