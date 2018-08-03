@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Camera Test</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <span id="text"></span>
+  <img id="pic" src="" alt="自拍" />
+  <input type="file" accept="image/*;capture=camera" />
+</body>
+<script>
+  window.onload = function () {
+    var constraints = { camera: true };
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(function (mediaStream) {
+        var pic = document.getElementById('pic');
+        pic.src = mediaStream;
+        var pic = document.getElementById('text');
+        text.innerText = mediaStream;
+      })
+      .catch(function (err) { console.log(err.name + ": " + err.message); });
+  }
+</script>
+
+</html>
