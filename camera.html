@@ -57,21 +57,19 @@
     };
 
     captureVideoButton.onclick = function () {
-      alert("aaa");
       navigator.mediaDevices.getUserMedia(constraints).
         then(handleSuccess).catch(handleError);
     };
 
-    // screenshotButton.onclick = video.onclick = function () {
-    //   canvas.width = video.videoWidth;
-    //   canvas.height = video.videoHeight;
-    //   canvas.getContext('2d').drawImage(video, 0, 0);
-    //   // Other browsers will fall back to image/png
-    //   img.src = canvas.toDataURL('image/webp');
-    // };
+    screenshotButton.onclick = video.onclick = function () {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      // Other browsers will fall back to image/png
+      img.src = canvas.toDataURL('image/webp');
+    };
 
     function handleSuccess(stream) {
-      alert(213);
       screenshotButton.disabled = false;
       video.srcObject = stream;
     }
