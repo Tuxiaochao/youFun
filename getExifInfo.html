@@ -48,20 +48,20 @@
       background-color: #eee;
     }
 
-    dl {
+    table {
       width: 100%;
     }
 
-    dt {
-      width: 75%;
-      float: left;
-      margin: 0;
+    th {
+      width: 65%;
+      text-align: left;
+      padding: 5px;
     }
 
-    dd {
-      width: 25%;
-      float: right;
-      margin: 0;
+    td {
+      width: 35%;
+      text-align: right;
+      padding-right: 5px;
     }
   </style>
 </head>
@@ -105,10 +105,10 @@
 
         var itemsEle = '';
         for (item in data) {
-          itemsEle += '<dt>' + item + '</dt><dd>' + data[item] + '</dd>';
+          itemsEle += '<tr><th>' + item + '</th><td>' + data[item] + '</td></tr>';
         }
         itemsBoxEle.className = "EXIF-info show";
-        itemsBoxEle.innerHTML = '<dl>' + itemsEle + '</dl>';
+        itemsBoxEle.innerHTML = '<table border="1">' + itemsEle + '</table>';
 
       } else {
         itemsBoxEle.className = "EXIF-info hide";
