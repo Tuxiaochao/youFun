@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/exif-js/2.3.0/exif.min.js"></script>
+  <style>
+    .upload {
+      display: none;
+    }
+
+    .btn {
+      display: block;
+      background-color: #2196F3;
+      padding: 15px 25px;
+      margin: 0 auto;
+      margin-top: 30px;
+      border-radius: 5px;
+      color: #fff;
+    }
+
+    .img-box {
+      width: 100%;
+      text-align: center;
+    }
+
+    .showPic {
+      width: 80%;
+      margin-top: 30px;
+      max-width: 200px;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+
+    .EXIF-info {
+      width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+      background-color: #eee;
+    }
+
+    dl {
+      width: 100%;
+    }
+
+    dt {
+      width: 75%;
+      float: left;
+      margin: 0;
+    }
+
+    dd {
+      width: 25%;
+      float: right;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <input class="upload" type="file" accept="image/*" onchange="fileUpload(event)">
+  <button class="btn" onclick="document.getElementsByClassName('upload')[0].click()">上传图片</button>
+  <div class="img-box"></div>
+  <p class="create-time hide">
+    <label>创建时间:</label>
+    <span></span>
+  </p>
+  <div class="EXIF-info hide"></div>
+</body>
+<script>
+  function fileUpload(event) {
+    var file = event.target.files[0];
+    let FR = new FileReader();
+    FR.readAsDataURL(file);
+    FR.onloadend = function (evt) {
+      var image = document.createElement("IMG");
+      image.className = "showPic";
+      image.src = evt.target['result'];
+      document.getElementsByClassName("img-box")[0].appendChild(image);
+      setTimeout(getEXIFData(image), 0);
+    };
+  }
+
+  function getEXIFData(img) {
+    EXIF.getData(img, function () {
+      var data = EXIF.getAllTags(this);
+      var itemsBoxEle = document.getElementsByClassName("EXIF-info")[0];
+      var createTimeEle = document.getElementsByClassName("create-time")[0].getElementsByTagName("span")[0];
+      if (data.ExifVersion) {
+        createTimeEle.parentNode.className = "create-time show";
+        if (data.DateTimeOriginal) {
+          createTimeEle.innerText = data.DateTimeOriginal
+        } else {
+          createTimeEle.innerText = "无";
+        }
+
+        var itemsEle = '';
+        for (item in data) {
+          itemsEle += '<dt>' + item + '</dt><dd>' + data[item] + '</dd>';
+        }
+        itemsBoxEle.className = "EXIF-info show";
+        itemsBoxEle.innerHTML = '<dl>' + itemsEle + '</dl>';
+
+      } else {
+        itemsBoxEle.className = "EXIF-info hide";
+        
+        createTimeEle.parentNode.className = "create-time hide";
+          
+      }
+    });
+  }
+</script>
+
+</html>
