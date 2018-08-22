@@ -86,7 +86,7 @@
       image.className = "showPic";
       image.src = evt.target['result'];
       document.getElementsByClassName("img-box")[0].appendChild(image);
-      setTimeout(getEXIFData(image), 0);
+      setTimeout(getEXIFData(image), 100);
     };
   }
 
