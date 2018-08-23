@@ -104,7 +104,7 @@
       var itemsBoxEle = document.getElementsByClassName("EXIF-info")[0];
       var createTimeEle = document.getElementsByClassName("create-time")[0].getElementsByTagName("span")[0];
       alert(JSON.stringify(data));
-      if (data.Orientation) {
+      if (data.Orientation != undefined) {
         createTimeEle.parentNode.className = "create-time show";
         if (data.DateTimeOriginal) {
           createTimeEle.innerText = data.DateTimeOriginal
