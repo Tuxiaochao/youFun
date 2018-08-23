@@ -108,7 +108,7 @@
       if (Object.keys(data).length > 0) {
         createTimeEle.parentNode.className = "create-time show";
         if (data.DateTimeOriginal) {
-          var canUseText = ((new Date().getTime() - data.DateTimeOriginal.getTime()) / 60 / 60) > 5 ? "（大于5分钟 不可用）" : "（小于等于5分钟 可用）";
+          var canUseText = ((new Date().getTime() - new Date(data.DateTimeOriginal.split(" ")[0].replace(/[\:]/g, "/") + " " + data.DateTimeOriginal.split(" ")[1]).getTime()) / 60 / 60) > 5 ? "（大于5分钟 不可用）" : "（小于等于5分钟 可用）";
           createTimeEle.innerText = data.DateTimeOriginal + canUseText;
         } else {
           createTimeEle.innerText = "无";
