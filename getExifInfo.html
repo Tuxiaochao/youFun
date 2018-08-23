@@ -85,8 +85,16 @@
       var image = document.createElement("IMG");
       image.className = "showPic";
       image.src = evt.target['result'];
-      document.getElementsByClassName("img-box")[0].appendChild(image);
-      setTimeout(getEXIFData(image), 100);
+      var imgBoxEle = document.getElementsByClassName("img-box")[0];
+      imgBoxEle.childNodes[0] && (imgBoxEle.childNodes[0].remove());
+      imgBoxEle.appendChild(image);
+
+      var timer = setInterval(function () {
+        if (document.getElementsByClassName("showPic").length >= 1) {
+          clearInterval(timer);
+          getEXIFData(document.getElementsByClassName("showPic")[0]);
+        }
+      }, 100);
     };
   }
 
@@ -95,7 +103,8 @@
       var data = EXIF.getAllTags(this);
       var itemsBoxEle = document.getElementsByClassName("EXIF-info")[0];
       var createTimeEle = document.getElementsByClassName("create-time")[0].getElementsByTagName("span")[0];
-      if (data.ExifVersion) {
+
+      if (data.Orientation) {
         createTimeEle.parentNode.className = "create-time show";
         if (data.DateTimeOriginal) {
           createTimeEle.innerText = data.DateTimeOriginal
@@ -113,7 +122,7 @@
       } else {
         itemsBoxEle.innerHTML = "没有EXIF信息！";
         createTimeEle.parentNode.className = "create-time hide";
-          
+
       }
     });
   }
