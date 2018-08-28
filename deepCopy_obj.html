@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>对象的深拷贝</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 深度递归遍历法
+  function deepCopy(obj) {
+    var objType = Object.prototype.toString.apply(obj).match(/\[object\s(\S*)\]/)[1];
+    switch(objType) {
+      case "Number":
+      case "String":
+      case "Null":
+      case "Undefined":
+      case "Boolean": 
+        return obj;
+      case "Object":
+        var resObj = {};
+        for (var item in obj) {
+           resObj[item] = deepCopy(obj[item]);
+        }
+        return resObj;
+      case "Array":
+        var resArr = [];
+        obj.filter(function(item, index) {
+          resArr.push(deepCopy(item));
+        });
+        return resArr;
+      default:
+        break;
+    }
+  }
+
+  // 对象的属性序列化
+  function deepCopyObj(obj) {
+    if (obj == undefined) {
+      return undefined;
+    } else {
+      return JSON.parse(JSON.stringify(obj));
+    }
+  }
+</script>
+</html>
