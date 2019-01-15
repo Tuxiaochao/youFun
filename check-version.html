@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>check browser version</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      -webkit-font-smoothing: antialiased;
+      -webkit-user-select: none;
+      -ms-user-select:none;
+      font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+      font-size: 62.5%
+    }
+    body {
+        font-size: 1.4rem;
+        height: 100%;
+        overflow: auto;
+    }
+    .is-version {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9;
+        display: none;
+        background-color: rgba(0, 0, 0, .4);
+    }
+    .alert-modal {
+        max-width: 270px;
+        background-color: #fff;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        border-radius: 13px;
+        -webkit-border-radius: 13px;
+        margin: auto;
+    }
+    .alert-modal p {
+        margin: 0;
+        text-align: justify;
+        font-size: 13px;
+        color: inherit;
+        padding: 0 16px 0;
+    }
+    .alert-modal h4 {
+        font-size: 17px;
+        font-weight: 600;
+        margin: 0;
+        padding: 20px 16px 7px;
+        text-align: center;
+    }
+    .alert-modal button {
+        border: none;
+        border-top: 1px solid #dbdbdf;
+        display: block;
+        font-size: 17px;
+        width: 100%;
+        padding: 6px;
+        height:44px;
+        background-color: transparent;
+        color:#488aff;
+        font-weight: 700;
+    }
+    .alert-modal span {
+        color:#488aff;
+        text-decoration: underline;
+    }
+    .alert-modal input {
+        opacity: 0;
+    }
+    .copy-success {
+        position: fixed;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        margin:auto;
+        width:150px;
+        height: 40px;
+        line-height:40px;
+        background-color:rgba(0,0,0,.85);
+        color:#fff;
+        z-index: 1;
+        border-radius: 6px;
+        opacity: 0;
+        text-align: center;
+    }
+    .copy-success.show {
+        z-index: 10;
+        animation: showCopy 2s ease;
+        -webkit-animation: showCopy 2s ease;
+    }
+    @keyframes showCopy {
+        0% {opacity: 0}
+        30% {opacity: 1}
+        70% {opacity: 1}
+        100% {opacity: 0}
+    }
+    @-webkit-keyframes showCopy {
+        0% {opacity: 0}
+        30% {opacity: 1}
+        70% {opacity: 1}
+        100% {opacity: 0}
+    }
+    .bea-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99;
+      width: 100%;
+      height: 5.5rem;
+      padding: 4px;
+      min-height: 44px;
+      background-image: url(assets/imgs/logo_bg.jpg),url(assets/imgs/rainbow-bg.jpg);
+      background-size: auto 50%,auto 30%;
+      background-position: right 15% top 30%,0 bottom;
+      background-repeat: no-repeat,repeat-x;
+      background-color: #ed171f;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .text-left {
+        text-align: left;
+    }
+    .font-34 {
+        font-size: 3.4rem;
+    }
+    .font-22 {
+        font-size: 2.2rem;
+    }
+    .font-16 {
+        font-size: 1.6rem;
+        margin-left: .8rem;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-pack: center;
+        -webkit-box-align: center;
+    }
+    .font-12 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .font-blue {
+        color: #04adf0;
+    }
+    .underline {
+        text-decoration: underline;
+    }
+    .header-top {
+        margin-top: 5.5rem;
+    }
+    .publicize-img {
+        width: 100%;
+    }
+    .benifit-box {
+        width: 100%;
+        margin-top: -5px;
+        overflow: hidden;
+    }
+    .benifit-box>div {
+        width: 50%;
+        height: 100%;
+        float: left;
+    }
+    .rate {
+        background-color: #ea1f22;
+    }
+    .cash-back {
+        background-color: #a41b21;
+    }
+    .benifit-box p {
+        color: #fff;
+        text-align: right;
+    }
+    .benifit-box img {
+        width: 100%;
+    }
+    .benifit-box .title {
+        padding: 1rem;
+    }
+    .benifit-box .value {
+        font-size: 5rem;
+        font-weight: bolder;
+        padding-right: 1rem; 
+    }
+    .tip {
+        padding: 0.8rem 0.8rem;
+        color: #585656;
+    }
+    .form-box {
+        width: 100%;
+        padding: 0.5rem;
+        color: #585656;
+    }
+
+    .form-box .item {
+        height: 3.2rem;
+        margin: 1rem 0;
+
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: row;
+    }
+    .item .title {
+        min-width: 6rem;
+        flex-basis: 6rem;
+    }
+    .item .input-box {
+        flex-grow: 1;
+        width: 100%;
+        padding: 0 0.5rem;
+    }
+    .item .tag {
+        font-size: 1rem;
+    }
+    .item input {
+        border: 1px solid #e9e9ec;
+        border-radius: 0;
+        height: 3rem;
+        text-align: justify;
+        -webkit-appearance: none;
+    }
+    #branchCode {
+        width: 47%;
+        float: left;
+    }
+    #sellerId {
+        width: 47%;
+        float: right;
+    }
+    #extendId {
+        width: 100%;
+    }
+    .my-btn {
+        display: block;
+        margin: 1rem auto;
+        border: 0;
+        outline: none;
+        background-color: #f89f2f;
+        width: 94%;
+        height: 6rem;
+        font-size: 1.8rem;
+        border-radius: 0;
+        color: #fff;
+        padding: 0 1em;
+        text-decoration: none;
+        text-align: center;
+        -webkit-appearance: none;
+        text-overflow: ellipsis;
+        text-transform: none;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color, opacity 100ms linear;
+        user-select: none;
+        line-height: 1;
+    }
+    .text {
+        margin: 1rem;
+        font-size: 1.6rem;
+        text-align: center;
+        color: #585656;
+    }
+    .en-text {
+        padding: 0 0.5rem;
+        text-align: center;
+        color: #000;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+    .remark-box {
+        overflow: hidden;
+        transition: height 1s;
+        -webkit-transition: height 1s; /* Safari and Chrome */
+    }
+    .remark {
+        padding: 1rem;
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+        border-bottom: 1px solid #e9e9ec;
+        border-top: 1px solid #e9e9ec;
+    }
+    .remark-content {
+        padding: 0.5rem;
+        padding-right: 0.8rem;
+        font-size: 1.2rem;
+        color: #585656;
+        padding-left: 2rem;
+        text-indent: -1.2rem;
+        text-align: justify;
+    }
+    .toggle-icon {
+        position: absolute;
+        right: 2rem;
+        width: 1.5rem;
+        opacity: 0.5;
+    }
+    .notice-text {
+        color: red;
+        font-size: 16px;
+        text-align: center;
+    }
+    .list {
+        padding: 0.5rem 0.5rem 2rem 2rem;
+    }
+    .market-date {
+        padding-left: 1rem;
+        padding-bottom: 2rem;
+    }
+    .land-remind{
+      font-size: 14px;
+      text-indent: 5px;
+      line-height: 25px;
+    }
+    .land-remind a{
+      color: #0449c0;
+    }
+    table{
+      font-size: 12px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="is-version">
+    <div class="alert-modal">
+      <h4>注意</h4>
+      <p>提提你，如於申請過程中未能上載文件或遇到其他問題，可能因為你使用的瀏覽器並不支援此網頁。請<span onClick="copyUrl()">按此</span>複製連結至Safari,Chrome,Firefox或Internet
+        Explorer繼續申請。</p>
+      <input type="text" id="copy-ipt" value="测试复制的内容">
+      <button onclick="hideAlert()">確認</button>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+  window.onload = function () {
+    if (!checkVersion()) {
+      var body = document.getElementsByTagName('body')[0];
+      var elem = document.getElementsByClassName('is-version')[0];
+      elem.style.display = 'block';
+      body.style.overflow = 'hidden';
+      body.style.position = 'fixed';
+    } else {
+      alert("你使用的瀏覽器並支援此網頁。")
+    }
+  }
+
+  function copyUrl() {
+    var copyUrl = document.getElementById("copy-ipt");
+    copyUrl.select();
+    document.execCommand("Copy");
+    var copySuc = document.getElementById("copySuccess");
+    copySuc.setAttribute('class', 'copy-success show');
+    setTimeout(function () {
+      copySuc.setAttribute('class', 'copy-success');
+    }, 2000)
+  }
+  function hideAlert() {
+    var elem = document.getElementsByClassName('is-version')[0];
+    var body = document.getElementsByTagName('body')[0];
+    elem.style.display = 'none';
+    body.style.overflow = 'auto';
+    body.style.position = 'static';
+  }
+
+  function checkVersion() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (ua.indexOf("Opera") > -1 && ua.match(/(opera\/)(\d+)/i)[2] >= 42) {
+      return true;
+    } else if (ua.indexOf("MSIE") == -1 && ua.indexOf("Trident") > -1) {
+      return true;
+    } else if (ua.indexOf("Firefox") > -1 && ua.match(/(firefox\/)(\d+)/i)[2] >= 51) {
+      return true;
+    } else if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") > -1 && ua.match(/(chrome\/)(\d+)/i)[2] >= 55) {
+      return true;
+    } else if ((ua.indexOf("iPad") > -1 || ua.indexOf('iPhone') > -1 || ua.indexOf("Mac") > -1) && ua.match(/(version\/)(\d+)/i)[2] >= 10) {
+      return true;
+    }
+    return false;
+  }
+</script>
+
+</html>

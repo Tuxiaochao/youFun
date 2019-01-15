@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Test Float</title>
+  <style>
+    .box {
+      width: 400px;
+      background-color: red;
+    }
+    .box::after {
+      content: "  ";
+      display: block;
+      clear: both;
+    }
+    .item-a {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      float: left;
+      background-color: aquamarine;
+    }
+    .item-b {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      float: right;
+      background-color: bisque;
+    }
+    .clearFloat-item {
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box">
+    <div class="item-a">
+      item A
+    </div>
+    <div class="item-b">
+      item B
+    </div>
+    <div class="clearFloat-item"></div>
+  </div> -->
+
+  <div class="box">
+      <div class="item-a">
+        item A
+      </div>
+      <div class="item-b">
+        item B
+      </div>
+    </div>
+</body>
+</html>

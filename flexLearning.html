@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Flex Learning</title>
+  <style>
+    .box {
+      width: 500px;
+      height: 500px;
+      display: flex;
+      background-color: antiquewhite;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      background-color: beige;
+    }
+    .item1 {
+      order: 2;
+    }
+    .item2 {
+      order: -1;
+    }
+    .item4 {
+      order: 1;
+    }
+    .item3 {
+      order: 0;
+    }
+    .item5 {
+      order: -2;
+    }
+    .item6 {
+      flex-shrink: 0.5;
+      order: 6;
+      background-color: coral;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="item item1">
+      item 1
+    </div>
+    <div class="item item2">
+      item 2
+    </div>
+    <div class="item item3">
+      item 3
+    </div>
+    <div class="item item4">
+      item 4
+    </div>
+    <div class="item item5">
+      item 5
+    </div>
+    <div class="item item6">
+      item 6
+    </div>
+  </div>
+</body>
+
+</html>
