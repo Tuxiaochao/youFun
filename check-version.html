@@ -344,10 +344,12 @@
   <div class="version">
     <label>你当前浏览器的版本是：</label><span class="vv"></span>
     <p class="result"></p>
+    <p class="test"></p>
   </div>
 </body>
 <script type="text/javascript">
   window.onload = function () {
+    alert(!checkVersion());
     if (!checkVersion()) {
       document.getElementsByClassName("result")[0].innerHTML = "你使用的瀏覽器不支援此網頁";
     } else {
