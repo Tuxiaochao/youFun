@@ -372,16 +372,22 @@
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     document.getElementsByClassName("vv")[0].innerHTML = ua;
     if (ua.indexOf("Opera") > -1 && ua.match(/(opera\/)(\d+)/i)[2] >= 42) {
+      alert(1)
       return true;
     } else if (ua.indexOf("MSIE") == -1 && ua.indexOf("Trident") > -1) {
+      alert(2)
       return true;
     } else if (ua.indexOf("Firefox") > -1 && ua.match(/(firefox\/)(\d+)/i)[2] >= 51) {
+      alert(3)
       return true;
     } else if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") > -1 && ua.match(/(chrome\/)(\d+)/i)[2] >= 55) {
+      alert(4)
       return true;
     } else if ((ua.indexOf("iPad") > -1 || ua.indexOf('iPhone') > -1 || ua.indexOf("Mac") > -1) && ua.match(/(version\/)(\d+)/i)[2] >= 10) {
+      alert(5)
       return true;
     }
+    alert(6)
     return false;
   }
 </script>
