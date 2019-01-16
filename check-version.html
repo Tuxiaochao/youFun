@@ -60,9 +60,9 @@
   function checkV() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     if (ua.indexOf("Firefox") > -1 || ua.indexOf("Chrome") > -1 || ua.indexOf("Safari") > -1 || ua.indexOf("Trident") > -1) {
-      alert(true)
+      return true
     } else {
-      alert(false)
+      return false
     }
   }
 
