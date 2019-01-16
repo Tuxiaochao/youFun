@@ -33,7 +33,7 @@
 </body>
 <script type="text/javascript">
   window.onload = function () {
-    if (!checkVersion()) {
+    if (!checkV()) {
       document.getElementsByClassName("result")[0].innerHTML = "你使用的瀏覽器不支援此網頁";
     } else {
       document.getElementsByClassName("result")[0].innerHTML = "你使用的瀏覽器支援此網頁";
@@ -55,6 +55,15 @@
       return true;
     }
     return false;
+  }
+
+  function checkV() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (ua.indexOf("Firefox") > -1 || ua.indexOf("Chrome") > -1 || ua.indexOf("Safari") > -1 || ua.indexOf("Trident") > -1) {
+      alert(true)
+    } else {
+      alert(false)
+    }
   }
 
   function getBrowserVersion() {
