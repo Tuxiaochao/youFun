@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdn.bootcss.com/bowser/1.9.4/bowser.js"></script>
   <title>check browser version</title>
   <style>
     .version {
@@ -32,6 +31,7 @@
     <p class="test"></p>
   </div>
 </body>
+<script src="https://cdn.bootcss.com/bowser/1.9.4/bowser.js"></script>
 <script type="text/javascript">
   window.onload = function () {
     if (!checkV()) {
@@ -39,12 +39,15 @@
     } else {
       document.getElementsByClassName("result")[0].innerHTML = "你使用的瀏覽器支援此網頁";
     }
+    
+    setTimeout(function() {
+      console.log("aaaa", bowser)
+      // var browser = bowser.getParser(window.navigator.userAgent);
 
-
-    var browser = bowser.getParser(window.navigator.userAgent);
-
-    alert(`The current browser name is "${browser.getBrowserName()}"`);
+      alert(`The current browser name is "${bowser.name}"`);
+    }, 100)
   }
+
 
   function checkVersion() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -110,5 +113,4 @@
     }
 }
 </script>
-
 </html>
