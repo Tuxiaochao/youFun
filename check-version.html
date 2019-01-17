@@ -56,7 +56,7 @@
     } else if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") > -1 && ua.match(/(chrome\/)(\d+)/i)[2] >= 55) {
       return true;
     } else if (ua.indexOf("iPad") > -1 || ua.indexOf('iPhone') > -1 || ua.indexOf("Mac") > -1) {
-      if (ua.indexOf("version") > -1 && (ua.match(/(version\/)(\d+)/i)[2] < 10)) {
+      if (ua.indexOf("Version") > -1 && (Number(ua.match(/(Version\/)(\d+)/i)[2]) < 10)) {
         return false
       } else {
         return true;
