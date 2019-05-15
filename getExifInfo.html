@@ -97,7 +97,25 @@
       document.getElementsByClassName("os")[0].innerHTML = "Android"
     }
 
-    document.getElementsByClassName("browser")[0].innerHTML = myBrowser()
+    // var isChrome = ua.indexOf('chrome') > -1;
+    // var isSafari = ua.indexOf('safari') > -1 && ua.indexOf('crios') == -1;
+    // var isWeChat = ua.indexOf('micromessenger') != -1;
+
+    var bro = ""
+    if (ua.indexOf('micromessenger') != -1) {
+      bro = "wechat"
+    } else if (ua.indexOf('chrome') > -1) {
+      bro = "chrome"
+    } else if(ua.indexOf('safari') > -1 && ua.indexOf('crios') == -1) {
+      bro = "safari"
+    } else {
+      bro = "others"
+    }
+    document.getElementsByClassName("browser")[0].innerHTML = bro
+
+
+
+
 
   }
 
@@ -114,12 +132,15 @@
     if (userAgent.indexOf("Chrome") > -1) {
       return "Chrome";
     }
-    if (userAgent.indexOf("Safari") > -1) {
+    if (ua.indexOf('safari') > -1 && ua.indexOf('crios') == -1) {
       return "Safari";
     } //判断是否Safari浏览器
     if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
       return "IE";
     }; //判断是否IE浏览器
+
+
+
   }
 
 
