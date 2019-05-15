@@ -101,7 +101,7 @@
     // var isSafari = ua.indexOf('safari') > -1 && ua.indexOf('crios') == -1;
     // var isWeChat = ua.indexOf('micromessenger') != -1;
 
-    var bro = ""
+    var bro = "others"
     // if (ua.indexOf('micromessenger') != -1) {
     //   bro = "wechat"
     // } else if ((ua.indexOf("safari") > -1 && ua.indexOf("chrome") > -1) || (ua.indexOf('safari') > -1 && ua.indexOf('crios') > -1)) {
@@ -124,6 +124,8 @@
       }
     } else if (ua.indexOf("safari") > -1) {
       bro = "safari"
+    } else if (ua.indexOf("baidu") > -1) {
+      bro = "baidu"
     }
  
 
