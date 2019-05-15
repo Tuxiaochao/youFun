@@ -72,7 +72,9 @@
 </head>
 
 <body>
-  <p class="agent"></p>
+  <p><label>agent: </label><span class="agent"></span></p>
+  <p><label>OS: </label><span class="os"></span></p>
+  <p><label>Browser: </label><span class="browser"></span></p>
   <input class="upload" type="file" accept="image/*" onchange="fileUpload(event)">
   <button class="btn" onclick="document.getElementsByClassName('upload')[0].click()">上传图片</button>
   <div class="img-box"></div>
@@ -83,59 +85,93 @@
   <div class="EXIF-info hide"></div>
 </body>
 <script>
-  window.onload = function() {
+  window.onload = function () {
+    let ua = (navigator.userAgent || navigator.vendor).toLowerCase();
+    var isIOS = !!ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/);
+    var isAOS = ua.indexOf('android') > -1 || ua.indexOf('adr') > -1;
     document.getElementsByClassName("agent")[0].innerHTML = window.navigator.userAgent
+
+    if (isIOS) {
+      document.getElementsByClassName("os")[0].innerHTML = "IOS"
+    } else if (isAOS) {
+      document.getElementsByClassName("os")[0].innerHTML = "Android"
+    }
+
+    document.getElementsByClassName("browser")[0].innerHTML = myBrowser()
+
   }
 
-  function fileUpload(event) {
-    var file = event.target.files[0];
-    let FR = new FileReader();
-    FR.readAsDataURL(file);
-    FR.onloadend = function (evt) {
-      var image = document.createElement("IMG");
-      image.className = "showPic";
-      image.src = evt.target['result'];
-      var imgBoxEle = document.getElementsByClassName("img-box")[0];
-      imgBoxEle.childNodes[0] && (imgBoxEle.childNodes[0].remove());
-      imgBoxEle.appendChild(image);
 
-      var timer = setInterval(function () {
-        if (document.getElementsByClassName("showPic").length >= 1) {
-          clearInterval(timer);
-          getEXIFData(document.getElementsByClassName("showPic")[0]);
-        }
-      }, 100);
-    };
+  function myBrowser() {
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1;
+    if (isOpera) {
+      return "Opera"
+    }; //判断是否Opera浏览器
+    if (userAgent.indexOf("Firefox") > -1) {
+      return "FF";
+    } //判断是否Firefox浏览器
+    if (userAgent.indexOf("Chrome") > -1) {
+      return "Chrome";
+    }
+    if (userAgent.indexOf("Safari") > -1) {
+      return "Safari";
+    } //判断是否Safari浏览器
+    if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+      return "IE";
+    }; //判断是否IE浏览器
   }
 
-  function getEXIFData(img) {
-    EXIF.getData(img, function () {
-      var data = EXIF.getAllTags(this);
-      var itemsBoxEle = document.getElementsByClassName("EXIF-info")[0];
-      var createTimeEle = document.getElementsByClassName("create-time")[0].getElementsByTagName("span")[0];
-      if (Object.keys(data).length > 0) {
-        createTimeEle.parentNode.className = "create-time show";
-        if (data.DateTimeOriginal) {
-          var canUseText = ((new Date().getTime() - new Date(data.DateTimeOriginal.split(" ")[0].replace(/[\:]/g, "/") + " " + data.DateTimeOriginal.split(" ")[1]).getTime()) / 60 / 60) > 5 ? "（大于5分钟 不可用）" : "（小于等于5分钟 可用）";
-          createTimeEle.innerText = data.DateTimeOriginal + canUseText;
+
+    function fileUpload(event) {
+      var file = event.target.files[0];
+      let FR = new FileReader();
+      FR.readAsDataURL(file);
+      FR.onloadend = function (evt) {
+        var image = document.createElement("IMG");
+        image.className = "showPic";
+        image.src = evt.target['result'];
+        var imgBoxEle = document.getElementsByClassName("img-box")[0];
+        imgBoxEle.childNodes[0] && (imgBoxEle.childNodes[0].remove());
+        imgBoxEle.appendChild(image);
+
+        var timer = setInterval(function () {
+          if (document.getElementsByClassName("showPic").length >= 1) {
+            clearInterval(timer);
+            getEXIFData(document.getElementsByClassName("showPic")[0]);
+          }
+        }, 100);
+      };
+    }
+
+    function getEXIFData(img) {
+      EXIF.getData(img, function () {
+        var data = EXIF.getAllTags(this);
+        var itemsBoxEle = document.getElementsByClassName("EXIF-info")[0];
+        var createTimeEle = document.getElementsByClassName("create-time")[0].getElementsByTagName("span")[0];
+        if (Object.keys(data).length > 0) {
+          createTimeEle.parentNode.className = "create-time show";
+          if (data.DateTimeOriginal) {
+            var canUseText = ((new Date().getTime() - new Date(data.DateTimeOriginal.split(" ")[0].replace(/[\:]/g, "/") + " " + data.DateTimeOriginal.split(" ")[1]).getTime()) / 60 / 60) > 5 ? "（大于5分钟 不可用）" : "（小于等于5分钟 可用）";
+            createTimeEle.innerText = data.DateTimeOriginal + canUseText;
+          } else {
+            createTimeEle.innerText = "无";
+          }
+
+          var itemsEle = '';
+          for (item in data) {
+            itemsEle += '<tr><th>' + item + '</th><td>' + data[item] + '</td></tr>';
+          }
+          itemsBoxEle.className = "EXIF-info show";
+          itemsBoxEle.innerHTML = '<table border="1">' + itemsEle + '</table>';
+
         } else {
-          createTimeEle.innerText = "无";
+          itemsBoxEle.innerHTML = "没有EXIF信息！";
+          createTimeEle.parentNode.className = "create-time hide";
+
         }
-
-        var itemsEle = '';
-        for (item in data) {
-          itemsEle += '<tr><th>' + item + '</th><td>' + data[item] + '</td></tr>';
-        }
-        itemsBoxEle.className = "EXIF-info show";
-        itemsBoxEle.innerHTML = '<table border="1">' + itemsEle + '</table>';
-
-      } else {
-        itemsBoxEle.innerHTML = "没有EXIF信息！";
-        createTimeEle.parentNode.className = "create-time hide";
-
-      }
-    });
-  }
+      });
+    }
 </script>
 
 </html>
