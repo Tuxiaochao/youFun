@@ -64,10 +64,15 @@
       text-align: left;
       padding-left: 5px;
     }
+
+    .agent {
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
+  <p class="agent"></p>
   <input class="upload" type="file" accept="image/*" onchange="fileUpload(event)">
   <button class="btn" onclick="document.getElementsByClassName('upload')[0].click()">上传图片</button>
   <div class="img-box"></div>
@@ -78,6 +83,10 @@
   <div class="EXIF-info hide"></div>
 </body>
 <script>
+  window.onload = function() {
+    document.getElementsByClassName("agent")[0].innerHTML = window.navigator.userAgent
+  }
+
   function fileUpload(event) {
     var file = event.target.files[0];
     let FR = new FileReader();
