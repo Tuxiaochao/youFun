@@ -102,15 +102,32 @@
     // var isWeChat = ua.indexOf('micromessenger') != -1;
 
     var bro = ""
+    // if (ua.indexOf('micromessenger') != -1) {
+    //   bro = "wechat"
+    // } else if ((ua.indexOf("safari") > -1 && ua.indexOf("chrome") > -1) || (ua.indexOf('safari') > -1 && ua.indexOf('crios') > -1)) {
+    //   bro = "chrome"
+    // } else if(ua.indexOf('safari') > -1 && ua.indexOf("chrome") <= -1 && ua.indexOf('crios') <= -1) {
+    //   bro = "safari"
+    // } else {
+    //   bro = "others"
+    // }
+
     if (ua.indexOf('micromessenger') != -1) {
       bro = "wechat"
-    } else if (ua.indexOf('chrome') > -1) {
-      bro = "chrome"
-    } else if(ua.indexOf('safari') > -1 && ua.indexOf('crios') == -1) {
+    } else if (ua.indexOf('crios') > -1) {
+      if (ua.indexOf('safari') > -1) {
+        bro = "chrome"
+      }
+    } else if (ua.indexOf("chrome") > -1) {
+      if (ua.indexOf("safari") > -1) {
+        bro = "chrome"
+      }
+    } else if (ua.indexOf("safari") > -1) {
       bro = "safari"
-    } else {
-      bro = "others"
     }
+ 
+
+
     document.getElementsByClassName("browser")[0].innerHTML = bro
 
 
